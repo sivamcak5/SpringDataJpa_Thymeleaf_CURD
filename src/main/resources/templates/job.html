@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="baseTemplate">
+<body>
+	<div layout:fragment="content">
+		<!-- BEGIN JUMBOTRON -->
+		<div class = "panel panel-default">
+		   <div class = "panel-heading">
+		      <h3 class = "panel-title">
+		         <span th:text="${job!=null and job.jobId gt 0 ? job.jobName : 'New Job' }"></span> Details
+		      </h3>
+		   </div>
+		   
+		   <div class = "panel-body">
+		   <div th:if="${job!=null and job.prevRes !=null and  job.prevRes != ''}" class="alert alert-success">
+               <span th:text="${job!=null ? job.prevRes : '' }"></span>
+            </div>
+            <div th:if="${job!=null and !job.ok}" class="alert alert-danger">
+               <span th:text="${job!=null ? job.response : '' }"></span>
+            </div>
+		<form th:object="${job}" th:action="@{/job/save}" action="#" method="post">
+			<input type="text" th:field="*{jobName}" class="form-control"
+				placeholder="Job Name" />
+			<input type="hidden" th:field="*{jobId}"/>	
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{location}" class="form-control"
+				placeholder="Location" />
+			 
+			<div style="clear: both; display: block; height: 10px;"></div>	
+			<select  th:field="*{userId}" class="form-control" >
+			 <option value="0">Select Owner</option>
+             <option th:each="user : ${job.users}" th:value="${user.userId}" th:text="${user.firstName}+' '+${user.lastName}"></option>
+            </select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+		</form>
+	   </div>
+		</div>
+		<!-- END JUMBOTRON -->
+
+	</div>
+</body>
+</html>

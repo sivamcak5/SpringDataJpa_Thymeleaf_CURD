@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+	<div th:fragment="navbar">
+		<nav class="navbar navbar-top navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+					    <li><a th:href="@{/}" class="navbar-top-link"><i class="glyphicon glyphicon-home"></i></a></li>
+						<li><a th:href="@{/user/new/0}" class="navbar-top-link">Add User</a></li>
+						<li><a th:href="@{/job/new/0}" class="navbar-top-link">Add Job</a></li>
+						<li><a th:href="@{/jobs}" class="navbar-top-link">Jobs Table</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+	</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="baseTemplate">
+<body>
+	<div layout:fragment="content">
+		<!-- BEGIN JUMBOTRON -->
+		<div class = "panel panel-default">
+		   <div class = "panel-heading">
+		      <h3 class = "panel-title">
+		      <span th:text="${user!=null and user.userId gt 0 ? user.firstName+' '+ user.lastName : 'New User' }"></span> Details
+		      </h3>
+		   </div>
+		   
+		   <div class = "panel-body">
+		   <div th:if="${user!=null and user.prevRes !=null and  user.prevRes != ''}" class="alert alert-success">
+               <span th:text="${user!=null ? user.prevRes : '' }"></span>
+            </div>
+            <div th:if="${user!=null and !user.ok}" class="alert alert-danger">
+               <span th:text="${user!=null ? user.response : '' }"></span>
+            </div>
+			<form th:object="${user}" th:action="@{/user/save}" action="#" method="post">
+			<input type="text" th:field="*{firstName}" class="form-control"
+				placeholder="Firstname" />
+				<input type="hidden" th:field="*{userId}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{lastName}" class="form-control"
+				placeholder="Lastname" />
+			 
+			<div style="clear: both; display: block; height: 10px;"></div>	
+			<input type="text" th:field="*{email}" class="form-control"
+				placeholder="Email" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+			</form>
+	   </div>
+		</div>
+		<!-- END JUMBOTRON -->
+
+	</div>
+</body>
+</html>
